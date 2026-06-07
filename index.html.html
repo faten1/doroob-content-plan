@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مبادرة تطوير المحتوى — منصة دروب</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --color-background-primary:#ffffff;
+  --color-background-secondary:#f8fafc;
+  --color-text-primary:#0f172a;
+  --color-text-secondary:#64748b;
+  --color-border-tertiary:#e2e8f0;
+  --color-border-secondary:#cbd5e1;
+  --border-radius-lg:10px;
+  --border-radius-md:7px;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --color-background-primary:#1e293b;
+    --color-background-secondary:#0f172a;
+    --color-text-primary:#f1f5f9;
+    --color-text-secondary:#94a3b8;
+    --color-border-tertiary:#334155;
+    --color-border-secondary:#475569;
+  }
+}
+body{background:#f1f5f9;font-family:Tahoma,'Segoe UI',sans-serif;min-height:100vh;padding:1.5rem 1rem}
+body.dark{background:#020617}
+#w{direction:rtl;max-width:880px;margin:0 auto;padding:.7rem 0 1rem}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.9rem}
+.bdg{border-radius:30px;padding:5px 13px;font-size:11px;font-weight:500;display:inline-flex;align-items:center;gap:5px}
+.sta{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:7px}
+.stb{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:.9rem}
+.sc{background:var(--color-background-secondary);border-radius:9px;padding:.7rem .9rem;border:.5px solid var(--color-border-tertiary)}
+.sn{font-size:1.5rem;font-weight:500;line-height:1}
+.sl{font-size:10px;color:var(--color-text-secondary);margin-top:3px;line-height:1.35}
+.tlb{display:flex;height:5px;border-radius:3px;overflow:hidden;direction:rtl;margin:3px 0}
+.tll{display:flex;justify-content:space-between;font-size:9px;color:var(--color-text-secondary);margin-bottom:3px}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;direction:rtl}
+.tab{border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);border-radius:7px;padding:5px 10px;font-size:10.5px;cursor:pointer;color:var(--color-text-secondary);font-family:inherit;transition:all .12s}
+.tab:hover{background:var(--color-background-secondary)}
+.tabc{border-style:dashed!important}
+.slbl{font-size:9px;color:var(--color-text-secondary);letter-spacing:.3px;margin:8px 0 4px}
+.pnl{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:11px;padding:1.1rem 1.2rem;margin-top:.6rem}
+.pnlc{border-style:dashed!important}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.7rem}
+.pt{font-size:1rem;font-weight:500;color:var(--color-text-primary)}
+.ps{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+.psl{border-radius:20px;padding:3px 10px;font-size:10px;font-weight:500}
+.mts{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.7rem}
+.mt{display:inline-flex;align-items:center;gap:4px;background:var(--color-background-secondary);border-radius:20px;padding:3px 9px;font-size:10.5px;color:var(--color-text-secondary);border:.5px solid var(--color-border-tertiary)}
+.gb{border-radius:7px;padding:.6rem .85rem;font-size:12px;line-height:1.6;border-right:3px solid transparent;margin-bottom:.7rem;color:var(--color-text-primary)}
+.clbl{font-size:9px;color:var(--color-text-secondary);font-weight:500;letter-spacing:.3px;margin-bottom:4px}
+.cls{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.ai{font-size:11px;padding:3px 12px 3px 0;position:relative;line-height:1.5;border-bottom:.5px solid var(--color-border-tertiary);color:var(--color-text-primary)}
+.ai:last-child{border-bottom:none}
+.ai::before{content:'';position:absolute;right:3px;top:10px;width:4px;height:4px;border-radius:50%;background:var(--color-border-secondary)}
+.oi{font-size:10.5px;background:var(--color-background-secondary);border-radius:5px;padding:4px 7px;margin-bottom:3px;color:var(--color-text-primary);display:flex;align-items:flex-start;gap:4px}
+.out-item{border-radius:6px;margin-bottom:3px;overflow:hidden;border:.5px solid var(--color-border-tertiary);transition:border-color .12s,box-shadow .12s}
+.out-item:hover{border-color:var(--color-border-secondary);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.out-hdr{font-size:11px;padding:6px 8px;display:flex;align-items:center;gap:5px;cursor:pointer;background:var(--color-background-secondary);color:var(--color-text-primary);user-select:none}
+.out-arr{font-size:8px;color:var(--color-text-secondary);margin-right:auto;flex-shrink:0;transition:transform .18s}
+.out-arr.op{transform:rotate(180deg)}
+.out-bdy{display:none;padding:8px 10px;background:var(--color-background-primary);border-top:.5px solid var(--color-border-tertiary)}
+.out-bdy.op{display:block}
+.kpr{display:flex;gap:6px;direction:rtl;margin-top:.75rem}
+.kp{border-radius:7px;padding:.55rem;text-align:center;flex:1;border:.5px solid transparent}
+.kpn{font-size:1.05rem;font-weight:500}
+.kpl{font-size:9.5px;margin-top:2px;line-height:1.3}
+.tr{display:flex;gap:4px;flex-wrap:wrap;margin-top:.55rem}
+.tm{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:6px;padding:4px 8px;font-size:10.5px;display:flex;align-items:center;gap:4px}
+.tm.gold{background:#fefce8;border-color:#fde047;font-weight:500}
+.dt{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nt{margin-top:.7rem;font-size:10.5px;color:var(--color-text-secondary);border-top:.5px solid var(--color-border-tertiary);padding-top:.55rem;line-height:1.55;display:flex;gap:5px}
+.tn{background:#f0fdf4;border:.5px solid #bbf7d0;border-radius:6px;padding:.55rem .8rem;margin:.55rem 0;font-size:11px;line-height:1.6;color:#14532d;border-right:3px solid #166534}
+.tn.amber{background:#fffbeb;border-color:#fde68a;color:#92400e;border-right-color:#d97706}
+.tn.blue{background:#eff6ff;border-color:#bfdbfe;color:#1e40af;border-right-color:#1e40af}
+.ev{border-radius:6px;padding:.5rem .75rem;font-size:11px;margin:.5rem 0;border-right:3px solid #f59e0b;line-height:1.55;background:#fffbeb;color:#92400e;border:.5px solid #fde68a}
+.leg{display:flex;gap:11px;margin-top:.55rem;flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:4px;font-size:9.5px;color:var(--color-text-secondary)}
+.lb{width:8px;height:8px;border-radius:2px}
+.ld{width:8px;height:8px;border-radius:2px;border:1.5px dashed #aaa}
+.wfr{display:flex;align-items:center;flex-wrap:wrap;gap:2px;margin:.4rem 0 .65rem;direction:rtl}
+.wfs{border-radius:5px;padding:4px 6px;text-align:center;font-size:9.5px;font-weight:500;line-height:1.25;border:.5px solid transparent;white-space:pre-line;min-width:42px}
+.wfa{font-size:10px;padding:0 1px;color:var(--color-text-secondary);opacity:.4}
+.scbs{display:flex;gap:4px;flex-wrap:wrap;margin:.35rem 0 .6rem}
+.scb{flex:1;min-width:60px;border-radius:6px;padding:.4rem .5rem;text-align:center;border:.5px solid transparent}
+.scbn{font-size:.85rem;font-weight:500}
+.scbl{font-size:9px;margin-top:1px}
+.tbl{width:100%;border-collapse:collapse;margin:.35rem 0 .6rem}
+.tbl td,.tbl th{padding:4px 6px;border:.5px solid var(--color-border-tertiary);font-size:10px;line-height:1.35}
+.tbl th{background:var(--color-background-secondary);font-weight:500;font-size:9.5px}
+.tbl tr:nth-child(even) td{background:var(--color-background-secondary)}
+.mlnote{border-radius:6px;padding:.45rem .7rem;font-size:10.5px;margin:.4rem 0;line-height:1.6;border:.5px solid transparent}
+.sus{background:var(--color-background-secondary);border-radius:6px;padding:.45rem .7rem;font-size:10.5px;color:var(--color-text-secondary);margin:.4rem 0;line-height:1.5;border:.5px solid var(--color-border-tertiary)}
+.prog-wrap{margin:.35rem 0 .55rem}
+.prog-lbl{font-size:10px;color:var(--color-text-secondary);margin-bottom:3px;display:flex;justify-content:space-between}
+.prog-bar{height:5px;border-radius:3px;background:var(--color-background-secondary);overflow:hidden}
+.prog-fill{height:100%;border-radius:3px}
+.role-lbl{font-size:9px;opacity:.65;margin-right:2px}
+.star-lbl{font-size:9px;color:#ca8a04}
+.top-bar{background:var(--color-background-primary);border-bottom:.5px solid var(--color-border-tertiary);padding:.6rem 1rem;margin-bottom:1rem;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
+.top-title{font-size:13px;font-weight:500;color:var(--color-text-secondary)}
+.share-date{font-size:11px;color:var(--color-text-secondary)}
+@media(max-width:640px){.sta{grid-template-columns:repeat(2,1fr)}.stb{grid-template-columns:repeat(2,1fr)}.cls{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div style="max-width:880px;margin:0 auto">
+<div class="top-bar">
+  <span class="top-title">📋 مبادرة تطوير المحتوى التدريبي — منصة دروب</span>
+  <span class="share-date" id="dateEl"></span>
+</div>
+</div>
+<div id="w">
+<div class="hdr">
+  <div id="mb" class="bdg" style="background:#dbeafe;color:#1e40af"><span style="font-size:6px">●</span>جارية: المرحلة ٣</div>
+  <div style="text-align:right">
+    <div style="font-size:1.35rem;font-weight:500;color:var(--color-text-primary)">مبادرة تطوير المحتوى</div>
+    <div style="font-size:10.5px;color:var(--color-text-secondary);margin-top:2px">منصة دروب — خطة التحول الشاملة 2025–2026</div>
+  </div>
+</div>
+<div class="sta">
+  <div class="sc" style="border-color:#3b82f6"><div class="sn" style="color:#0369a1">464</div><div class="sl">إجمالي البرامج التدريبية</div></div>
+  <div class="sc" style="border-color:#10b981"><div class="sn" style="color:#0f766e">247</div><div class="sl">إجمالي الدورات التدريبية</div></div>
+  <div class="sc" style="border-color:#8b5cf6"><div class="sn" style="color:#7c3aed">217</div><div class="sl">إجمالي الجلسات التفاعلية</div></div>
+  <div class="sc" style="border-color:#f59e0b"><div class="sn" style="color:#b45309">129</div><div class="sl">مسار تدريبي مصنّف</div></div>
+</div>
+<div class="stb">
+  <div class="sc" style="border-color:#fcd34d;background:#fffbeb"><div class="sn" style="color:#b45309">982<span style="font-size:.8rem;margin-right:3px">ساعة</span></div><div class="sl" style="color:#92400e;font-weight:500">إجمالي ساعات المحتوى — حجم المشروع الفعلي</div></div>
+  <div class="sc"><div class="sn" style="color:#166534">5</div><div class="sl">أشخاص — حجم فريق المبادرة</div></div>
+  <div class="sc"><div class="sn" style="color:var(--color-text-primary)">39<span style="font-size:.8rem;color:var(--color-text-secondary);margin-right:3px">أسبوعاً</span></div><div class="sl">متبقياً في إجمالي المشروع</div></div>
+</div>
+<div style="margin-bottom:.65rem">
+  <div class="tll"><span>بداية المشروع</span><span>يونيو ٢٠٢٦</span><span>أغسطس ٢٠٢٦</span><span>ديسمبر ٢٠٢٦</span><span>النهاية</span></div>
+  <div class="tlb">
+    <div style="width:4%;background:#166534"></div>
+    <div style="width:5%;background:#4338ca"></div>
+    <div style="width:3%;background:#1e40af"></div>
+    <div style="width:14%;background:#1e40af;opacity:.55"></div>
+    <div style="width:55%;background:#0f766e;opacity:.65"></div>
+    <div style="width:19%;background:#6b7280;opacity:.35"></div>
+  </div>
+  <div class="slbl">المراحل الأساسية</div>
+  <div class="tabs" id="tm"></div>
+  <div class="slbl">عمليات مستمرة</div>
+  <div class="tabs" id="tc"></div>
+</div>
+<div id="det"></div>
+<div class="leg">
+  <div class="li"><div class="lb" style="background:#166534"></div>مكتملة</div>
+  <div class="li"><div class="lb" style="background:#4338ca"></div>جارية</div>
+  <div class="li"><div class="lb" style="background:#0369a1;opacity:.6"></div>قادمة</div>
+  <div class="li"><div class="ld"></div>مستمرة</div>
+</div>
+</div>
+<script>
+document.getElementById('dateEl').textContent = 'آخر تحديث: ' + new Date().toLocaleDateString('ar-SA');
+
+var P=[
+{id:1,tp:'main',nm:'حصر المحتوى الحالي',sb:'دورات + جلسات + مسارات',st:'done',sl:'مكتملة ✅',wk:'أُغلقت ١٤ مايو ٢٠٢٦',du:'أسبوعان فعليان (مخطط: ٤ أسابيع)',team:3,ow:'مسؤول المبادرة',cl:'#166534',bg:'#f0fdf4',tx:'#14532d',
+ev:'هدفت هذه المرحلة إلى بناء قاعدة بيانات موحدة ودقيقة تمثل الأساس التشغيلي لبقية مراحل التحول.',
+gl:'توثيق شامل لكل برامج ومسارات منصة دروب في ملفات منظمة قابلة للتحليل والعمل.',
+ac:['تفريغ ٢٤٧ دورة تدريبية و٢١٧ جلسة تفاعلية من المنصة بالكامل','توثيق ١٢٩ مسار تدريبي مصنّف بدون تكرار','تدقيق البيانات وتنظيفها وتوحيد البيانات الوصفية','اكتشاف التكرارات والتداخلات','رصد ٩٨٢ ساعة تدريبية وتصنيفها على القطاعات'],
+inp:['منصة دروب LMS','روابط الدورات والمسارات'],
+out:[{id:'o1a',t:'ملف الدورات — ٢٤٧ دورة ✓',d:'قاعدة بيانات شاملة لجميع الدورات.',cols:['الدورة','القطاع','المزود','الساعات'],stats:['٢٤٧ دورة','٧٠٥ ساعة'],use:'مرجع التقييم في المرحلة الرابعة',dec:'جاهز للتحكيم'},
+{id:'o1b',t:'ملف الجلسات — ٢١٧ جلسة ✓',d:'توثيق كامل للجلسات.',cols:['الجلسة','المقدم','المدة','القطاع'],stats:['٢١٧ جلسة','٢٧٧ ساعة'],use:'مرجع التقييم',dec:'جاهز للتقييم'},
+{id:'o1c',t:'ملف المسارات — ١٢٩ مساراً ✓',d:'خريطة كاملة للمسارات.',cols:['المسار','الدورات','القطاع','المستوى'],stats:['١٢٩ مسار'],use:'تقييم المسارات',dec:'جاهز'},
+{id:'o1d',t:'التقرير الإحصائي الأولي ✓',d:'يوثّق ٩٨٢ ساعة.',cols:['القطاع','البرامج','الساعات','النسبة'],stats:['٤٦٤ برنامج','٩٨٢ ساعة'],use:'مرجع تحديد الأولويات',dec:'جاهز'}],
+kp:[{n:'٤٦٤',l:'برنامج محصور'},{n:'٩٨٢ ساعة',l:'حجم المحتوى'},{n:'١٢٩',l:'مسار مصنّف'}],
+tn:'ملاحظة إدارية: تم إنجاز مرحلة حصر المحتوى في أقل من أسبوعين رغم أن المدة المخططة كانت أربعة أسابيع، وذلك بفضل الجهود المكثفة لفريق العمل.',tnCls:'amber',
+members:['فاتن','أحمد','عبير'],nt:''},
+
+{id:2,tp:'main',nm:'تحليل المحتوى وتحديد الأولويات',sb:'Content Prioritization — تصنيف الأولويات · تقادم المحتوى · قرارات التطوير',st:'curr',sl:'جارية — ٩٠٪',prog:90,wk:'٢١ مايو — ٩ يونيو ٢٠٢٦',du:'أسبوعان عمل فعليان',team:1,ow:'مسؤول المبادرة',cl:'#4338ca',bg:'#eef2ff',tx:'#3730a3',
+kph:'تقليص نطاق العمل من ٤٦٤ برنامجاً إلى قائمة مركزة ذات أولوية قصوى',
+ev:'تُحوّل هذه المرحلة جهود التطوير من معالجة جميع المحتويات دفعةً واحدة إلى قائمة مركزة من الأعلى أثراً.',
+gl:'تحليل المحتوى وتصنيفه لتحديد أولويات التطوير بما يضمن البدء بالمحتويات الأعلى أولوية وترشيد الجهود.',
+ac:['تحليل بيانات ٤٦٤ برنامجاً','مراجعة جودة البيانات واكتشاف السجلات الناقصة','عقد اجتماعات مراجعة مع فريق المحتوى','تحليل المحتوى المتشابه أو المكرر وتحليل التقادم','تصنيف الدورات والجلسات والمسارات','إعداد قاعدة بيانات قرارات المحتوى'],
+inp:['ملف حصر الدورات (٢٤٧)','ملف حصر الجلسات (٢١٧)','ملف حصر المسارات (١٢٩)','نتائج مرحلة الحصر'],
+out:[{id:'o2a',t:'ملف الدورات المصنف',d:'٢٤٧ دورة مصنفة بـ ٦ فئات.',cols:['الدورة','التصنيف','الأولوية','القرار'],stats:['٢٤٧ دورة'],use:'مرجع التشخيص والتحكيم',dec:'جاهز'},
+{id:'o2b',t:'ملف الجلسات المصنف',d:'٢١٧ جلسة مصنفة.',cols:['الجلسة','التصنيف','الأولوية','القرار'],stats:['٢١٧ جلسة'],use:'مرجع قرارات الأرشفة',dec:'جاهز'},
+{id:'o2c',t:'ملف المسارات المصنف',d:'١٢٩ مساراً بـ ٥ تصنيفات.',cols:['المسار','التصنيف','الدورات','القرار'],stats:['١٢٩ مساراً'],use:'مرجع إعادة الهيكلة',dec:'جاهز'},
+{id:'o2d',t:'Content Decision Register',d:'مرجع رسمي لجميع قرارات التطوير.',cols:['المحتوى','النوع','الأولوية','القرار','المسؤول'],stats:['٤٦٨ سجل'],use:'المرجع الرسمي للمراحل اللاحقة',dec:'جاهز للاعتماد'},
+{id:'o2e',t:'تقرير تحليل الأولويات',d:'نتائج + مشكلات + تكرار + تقادم + أولويات + توصيات.',cols:['نتائج','مشكلات','التكرار','التقادم','التوصيات'],stats:['تقرير متكامل'],use:'مرجع تنفيذي للإدارة',dec:'جاهز'}],
+mlNote:'📚 ٢٤٧ دورة: ١٠٧ قديمة | ⚠️ ٢٧ مشكلات | 🔄 ٣٧ متشابهة | 🎯 ٩٩ تحتاج قراراً || 🎥 ٢١٧ جلسة: ٦ قديمة | ⚠️ ٢٥ مشكلات | 🔍 ٣١ تحتاج قراراً || 🛤️ ١٢٩ مساراً: 🚨 ٨ حرجة | 📉 ٢٣ ضعيفة',
+sus:'الأعمال المتبقية: استكمال مراجعة مشكلات التواريخ · اعتماد التصنيفات النهائية · اعتماد قاعدة بيانات قرارات المحتوى · إغلاق المرحلة.',
+kp:[{n:'٤٦٤',l:'برنامج محلل'},{n:'١٣٠+',l:'يحتاج قراراً'},{n:'٩٠٪',l:'نسبة الإنجاز'}],
+members:['مسؤول المبادرة'],nt:'الإغلاق المتوقع ٩ يونيو ٢٠٢٦.'},
+
+{id:3,tp:'main',nm:'وضع المعايير وإطار الجودة',sb:'إطار الجودة + معايير الدورات والجلسات والمسارات والمزودين',st:'curr',sl:'جارية — ٧٠٪',prog:70,wk:'٢ يونيو — ١٥ يونيو ٢٠٢٦',du:'أسبوعان عمل',team:3,ow:'فاتن ياجزي — مسؤول المبادرة',cl:'#1e40af',bg:'#eff6ff',tx:'#1e3a8a',
+kph:'بناء مرجعية معتمدة لتحكيم المحتوى قبل البدء في التقييم والتطوير',
+ev:'تخضع جميع مخرجات هذه المرحلة للمراجعة والتحكيم والاعتماد الرسمي قبل اعتمادها نهائياً.',
+gl:'بناء إطار جودة ومعايير موحدة للمحتوى التدريبي بما يضمن وجود مرجعية معتمدة لتحكيم الدورات والجلسات والمسارات.',
+ac:['مراجعة المعايير المرجعية المعتمدة','مواءمة المعايير مع طبيعة منصة دروب','بناء معايير الدورات التدريبية','بناء معايير الجلسات التفاعلية','بناء معايير المسارات التدريبية','بناء معايير مزودي الخدمة','مراجعة المعايير مع أصحاب المصلحة','التحكيم والمراجعة مع د. ظافر','الاعتماد النهائي من د. صالح المدير'],
+inp:['قاعدة بيانات قرارات المحتوى','نتائج تحليل أولويات المحتوى','معايير المركز الوطني للتعليم الإلكتروني','أفضل الممارسات العالمية'],
+out:[{id:'o3a',t:'إطار الجودة المعتمد',d:'الوثيقة المرجعية الرئيسية — ٦ دومينات.',cols:['الدومين','المعيار','المستوى','القياس'],stats:['٦ دومينات'],use:'المرجع الرسمي لجميع عمليات التحكيم',dec:'يُعتمد من د. صالح قبل التطبيق'},
+{id:'o3b',t:'معايير تقييم الدورات',d:'معايير شاملة لتقييم جودة الدورات.',cols:['المعيار','الوزن','المستوى','القياس'],stats:['٢٤٧ دورة مستهدفة'],use:'مرجع فريق التحكيم في المرحلة الرابعة',dec:'إلزامي'},
+{id:'o3c',t:'معايير تقييم الجلسات',d:'معايير مخصصة لطبيعة الجلسات.',cols:['المعيار','الوزن','المستوى','القياس'],stats:['٢١٧ جلسة مستهدفة'],use:'مرجع تقييم الجلسات',dec:'إلزامي'},
+{id:'o3d',t:'معايير تقييم المسارات (MVS)',d:'الحد الأدنى المقبول — ٩ معايير.',cols:['المعيار','الحد الأدنى','الهدف المثالي','القياس'],stats:['١٢٩ مساراً'],use:'مرجع تقييم المسارات',dec:'إلزامي'},
+{id:'o3e',t:'معايير مزودي الخدمة',d:'متطلبات إلزامية ومرغوبة للمحتوى.',cols:['المعيار','الدورات','الجلسات','المستوى'],stats:['شرط إلزامي'],use:'تُسلَّم للمزودين',dec:'إلزامي — لا نشر بدونه'},
+{id:'o3f',t:'نموذج التحكيم والتقييم',d:'أداة Excel موحدة — فورمولا تلقائية.',cols:['البُعد','الدرجة','الملاحظات','القرار'],stats:['أداة موحدة'],use:'يُستخدم في المرحلة الرابعة',dec:'إبقاء / تحسين / إعادة / أرشفة'},
+{id:'o3g',t:'تقرير المراجعة والاعتماد',d:'وثيقة رسمية — يوقّعها د. صالح.',cols:['المعيار','الملاحظة','الحالة','التاريخ'],stats:['وثيقة رسمية'],use:'مرجع الاعتماد للمراحل اللاحقة',dec:'يصدر بتوقيع د. صالح'}],
+tn:'ملاحظة: تخضع جميع مخرجات هذه المرحلة للمراجعة والتحكيم والاعتماد الرسمي النهائي من د. صالح المدير.',tnCls:'blue',
+sus:'الأعمال المتبقية: استكمال مراجعة المعايير · عقد جلسة التحكيم مع د. ظافر · رفع المخرجات لد. صالح للاعتماد · إغلاق المرحلة.',
+kp:[{n:'٧',l:'مخرجات للاعتماد'},{n:'٧٠٪',l:'نسبة الإنجاز'},{n:'٣',l:'أشخاص'}],
+teamMembers:[{nm:'فاتن ياجزي',rl:'مسؤول المبادرة',gold:false},{nm:'د. ظافر',rl:'مراجع ومحكّم المعايير',gold:false},{nm:'د. صالح',rl:'محكّم نهائي ومعتمد المعايير',gold:true}],
+nt:'الاعتماد النهائي صلاحية حصرية لد. صالح المدير — لا تُطبَّق أي معايير دون توقيعه الرسمي.'},
+
+{id:4,tp:'main',nm:'تقييم وتحكيم المحتوى',sb:'فتح المحتوى + مراجعة + تحكيم + قرار',st:'next',sl:'قادمة',wk:'١٦ يونيو — ١١ أغسطس ٢٠٢٦',du:'٨ أسابيع',team:5,ow:'مسؤول المبادرة',cl:'#1e40af',bg:'#eff6ff',tx:'#1e3a8a',
+kph:'التحول من الحصر العددي إلى التشخيص النوعي القابل للقياس',
+gl:'الفريق يفتح كل دورة داخل المنصة فعلياً ويحكّم عليها وفق المعايير المعتمدة.',
+wf:['فتح\nالمحتوى','مراجعة\nبالمعايير','تعبئة\nالنموذج','إعطاء\nالدرجة','اتخاذ\nالقرار','تحديد\nالأولوية'],
+sc:[{r:'85–100',l:'إبقاء',bg:'#dcfce7',tx:'#166534',br:'#bbf7d0'},{r:'70–84',l:'تحسين',bg:'#fef9c3',tx:'#854d0e',br:'#fde68a'},{r:'50–69',l:'إعادة تصميم',bg:'#ffedd5',tx:'#9a3412',br:'#fed7aa'},{r:'< 50',l:'أرشفة',bg:'#fee2e2',tx:'#991b1b',br:'#fecaca'}],
+tasks:[['ملف تقييم الدورات (٢٤٧)','محلل أول + محلل ثانٍ'],['ملف تقييم الجلسات (٢١٧)','محلل ثانٍ — بالتوازي'],['ملف تقييم المسارات (١٢٩)','مطور أول — بعد الدورات'],['خارطة الأولويات','مسؤول المبادرة']],
+ac:['تقييم ٢٤٧ دورة وفق المعايير المعتمدة','تقييم ٢١٧ جلسة بالتوازي','تقييم ١٢٩ مساراً بعد اكتمال تقييم مكوناته','بناء خارطة أولويات التطوير'],
+inp:['إطار الجودة والمعايير المعتمدة','قاعدة بيانات قرارات المحتوى','نموذج التحكيم الموحد'],
+out:[{id:'o4a',t:'ملف تقييم الدورات — ٢٤٧ دورة',d:'Excel — ١٠ أبعاد.',cols:['الدورة','المحتوى','الاختبارات','الوسائط','الدرجة','القرار'],stats:['٢٤٧ دورة','١٠ أبعاد'],use:'أثناء فتح كل دورة في المنصة',dec:'إبقاء / تحسين / إعادة / أرشفة'},
+{id:'o4b',t:'خارطة أولويات التطوير',d:'ناتج نهائي يجمع كل القرارات.',cols:['العنصر','التصنيف','الأولوية','الجدول'],stats:['٤٦٤ برنامج + ١٢٩ مسار'],use:'يُغذّي مرحلة التطوير',dec:'خارطة طريق جاهزة'}],
+kp:[{n:'٤٦٤',l:'برنامج يُقيَّم'},{n:'٥',l:'قرارات تطوير'},{n:'٨٥+',l:'درجة الإبقاء'}],
+members:['مسؤول المبادرة','محلل أول','محلل ثانٍ','مطور أول','مطور ثانٍ'],nt:'يبدأ تطبيق المعايير المعتمدة من المرحلة الثالثة.'},
+
+{id:5,tp:'main',nm:'التطوير والإنتاج',sb:'تشخيص + تصميم + إنتاج + نشر',st:'next',sl:'قادمة',wk:'١٢ أغسطس ٢٠٢٦ — مارس ٢٠٢٧',du:'٣٠ أسبوعاً',team:5,ow:'مسؤول المبادرة',cl:'#0f766e',bg:'#f0fdfa',tx:'#134e4a',
+gl:'تحويل المحتوى من حالته الحالية إلى محتوى جاهز للنشر — بناءً على نتائج التقييم وخارطة الأولويات.',
+wf:['تشخيص','قرار\nالتطوير','إعادة\nكتابة','تصميم\nالتعلم','إنتاج\nالوسائط','مراجعة\nالجودة','نشر'],
+dp:[['دورة جيدة (85+)','مراجعة تقنية خفيفة → نشر'],['دورة متوسطة (70–84)','تحسين سريع → نشر'],['دورة ضعيفة (50–69)','إعادة تصميم كامل'],['محتوى طويل','تقسيم + Microlearning'],['دورتان متكررتان','دمج'],['محتوى قديم','أرشفة']],
+mlNote:'Microlearning: وحدات < ١٠ دقائق ← أنشطة قصيرة ← اختبارات سريعة ← أهداف صغيرة قابلة للقياس',
+tasks:[['إعادة كتابة المحتوى وتصميم التعلم','محلل أول + محلل ثانٍ'],['إنتاج الوسائط','مطور محتوى أول'],['اختبار المحتوى على LMS','مطور محتوى ثانٍ'],['الاعتماد والنشر','مسؤول المبادرة']],
+ac:['تطوير المحتوى عالي الأولوية أولاً','إعادة تصميم الدورات وفق المعايير','إنتاج الوسائط وتطبيق Microlearning','رفع المحتوى بعد اجتياز مراجعة الجودة'],
+inp:['خارطة أولويات التطوير','معايير الإنتاج المعتمدة','أدوات الإنتاج'],
+out:[{id:'o5a',t:'محتوى مطوّر جاهز للمراجعة',d:'يدخل مباشرة لمرحلة ضبط الجودة.',cols:['الدورة','نوع التحسين','حالة الإنتاج'],stats:['٨٠٪ من الأولويات'],use:'يُسلَّم لفريق ضبط الجودة',dec:'يدخل مرحلة الاعتماد'},
+{id:'o5b',t:'سجل التطوير الأسبوعي',d:'ملف تتبع يوثّق حالة كل دورة.',cols:['الدورة','الحالة','المسؤول','التسليم'],stats:['تحديث أسبوعي'],use:'متابعة الفريق',dec:'قياس تقدم التطوير'}],
+kp:[{n:'٨٠٪',l:'من الأولويات المحددة'},{n:'< ١٠ د',l:'حد Microlearning'},{n:'٥',l:'أشخاص'}],
+members:['مسؤول المبادرة','محلل أول','محلل ثانٍ','مطور أول','مطور ثانٍ'],nt:'٨٠٪ من المحتوى المُحدَّد في خارطة الأولويات — وليس إجمالي المنصة.'},
+
+{id:6,tp:'cont',nm:'ضبط الجودة والاعتماد',sb:'بوابة الاعتماد الإلزامية قبل النشر',st:'cont',sl:'مستمرة',wk:'المراحل ٤–٥ وما بعدها',du:'طوال المشروع',team:2,ow:'مسؤول المبادرة',cl:'#6b7280',bg:'#f9fafb',tx:'#374151',
+gl:'لا يُنشر أي محتوى إلا بعد اجتياز ثلاثة مستويات مراجعة — تعليمية + تشغيلية + تقنية.',
+wf:['محتوى\nمطوّر','مراجعة\nتعليمية','مراجعة\nتقنية','ملاحظات\nللمطور','تعديل','مراجعة\nثانية','اعتماد\nنهائي','نشر'],
+cycles:[{n:'المراجعة الأولى',d:'تعليمية + تقنية'},{n:'معالجة الملاحظات',d:'المطور يعدّل ويُعيد'},{n:'المراجعة الثانية',d:'التحقق من المعالجة'},{n:'الاعتماد النهائي',d:'إذن النشر الرسمي'}],
+tasks:[['المراجعة التعليمية','محلل محتوى أول'],['المراجعة التقنية','مطور محتوى أول'],['الاعتماد النهائي','مسؤول المبادرة']],
+ac:['مراجعة تعليمية: التصميم والأهداف والتسلسل','مراجعة تقنية: SCORM/xAPI والوسائط','إعادة الملاحظات للمطور','إصدار اعتماد النشر الرسمي'],
+inp:['المحتوى المطوّر من المرحلة الخامسة','قوائم التحقق والمعايير المعتمدة'],
+out:[{id:'o6a',t:'سجل الاعتمادات الرسمي',d:'كل محتوى اجتاز المراجعة وحصل على إذن النشر.',cols:['الدورة','تاريخ الاعتماد','الجودة','المعتمِد'],stats:['سجل رسمي'],use:'مرجع المحتوى المعتمد',dec:'منشور على المنصة'},
+{id:'o6b',t:'تقارير جودة شهرية',d:'توثّق حالة المراجعة والاعتماد شهرياً.',cols:['الدورة','الجودة','الملاحظات','القرار'],stats:['١٢ تقريراً سنوياً'],use:'يُرفع لمسؤول المبادرة',dec:'موافقة / تعديل / رفض'}],
+kp:[{n:'٩٠٪+',l:'معدل الاجتياز'},{n:'٣',l:'مستويات مراجعة'},{n:'٢',l:'مراجعان'}],
+members:['محلل محتوى أول','مطور محتوى أول'],nt:'مراجعة تعليمية + تشغيلية + تقنية.'},
+
+{id:7,tp:'cont',nm:'القياس والتحسين المستمر',sb:'حلقة تحسين مبنية على البيانات',st:'cont',sl:'مستمرة',wk:'من المرحلة الثالثة حتى النهاية',du:'طوال المشروع',team:2,ow:'مسؤول المبادرة',cl:'#455a64',bg:'#eceff1',tx:'#37474f',
+gl:'البيانات تقود القرارات ← القرارات تُحسّن المحتوى ← المحتوى يُعيد القياس. حلقة مستمرة.',
+wf:['جمع\nالبيانات','تحليل\nالأداء','تحديد\nالمشكلة','قرار\nالتحسين','تحديث\nالمحتوى','إعادة\nالقياس'],
+sus:'الاستدامة: تحديث دوري + دورة حياة المحتوى + حوكمة تشغيلية + استمرارية الجودة.',
+ac:['رصد مؤشرات الأداء من بيانات المنصة شهرياً','تحديد المحتوى منخفض الأداء','تقارير شهرية للفريق + ربع سنوية للإدارة','تحديث المحتوى بناءً على البيانات'],
+inp:['بيانات LMS','استبيانات الرضا','سجلات الاعتماد'],
+out:[{id:'o7a',t:'تقارير أداء شهرية',d:'للفريق — أداء المحتوى.',cols:['الدورة','الإكمال','النجاح','وقت التعلم','الإجراء'],stats:['١٢ تقريراً سنوياً'],use:'أداة عمل شهرية',dec:'تحسين / تحديث / أرشفة'},
+{id:'o7b',t:'تقارير تنفيذية ربع سنوية',d:'للإدارة — التقدم الاستراتيجي.',cols:['المؤشر','القيمة','الهدف','الفجوة'],stats:['٤ تقارير سنوياً'],use:'يُرفع للقيادة',dec:'تعديل / الاستمرار'},
+{id:'o7c',t:'لوحة أداء المحتوى',d:'ما نجح — يحتاج تحسين — يجب أرشفته.',cols:['التصنيف','الدورات','النسبة','الإجراء'],stats:['٤ تصنيفات'],use:'مرجع بصري سريع',dec:'تحديث / تحسين / أرشفة'}],
+kp:[{n:'١٢',l:'تقريراً شهرياً'},{n:'٤',l:'تقارير تنفيذية'},{n:'♻',l:'حلقة مستمرة'}],
+members:['مسؤول المبادرة','محلل محتوى ثانٍ'],nt:'الهدف تأسيس حلقة تحسين مستمرة.'}
+];
+
+var cur=3;
+function tO(id){var b=document.getElementById('ob-'+id),a=document.getElementById('oa-'+id);var was=b.classList.contains('op');document.querySelectorAll('.out-bdy').forEach(function(e){e.classList.remove('op');});document.querySelectorAll('.out-arr').forEach(function(e){e.classList.remove('op');});if(!was){b.classList.add('op');a.classList.add('op');}}
+function rOut(o,cl){var h='<div class="out-item"><div class="out-hdr" onclick="tO(\''+o.id+'\')"><span style="color:'+cl+';font-size:10px;flex-shrink:0">✓</span><span style="flex:1">'+o.t+'</span><span id="oa-'+o.id+'" class="out-arr">▼</span></div><div id="ob-'+o.id+'" class="out-bdy"><p style="font-size:10px;color:var(--color-text-secondary);margin-bottom:5px;line-height:1.45">'+o.d+'</p>';if(o.stats){h+='<div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px">';for(var s=0;s<o.stats.length;s++)h+='<span style="background:var(--color-background-secondary);border-radius:20px;padding:1px 7px;font-size:9px;color:var(--color-text-secondary)">'+o.stats[s]+'</span>';h+='</div>';}if(o.cols){h+='<div class="clbl" style="margin-bottom:2px">الأعمدة</div><div style="display:flex;flex-wrap:wrap;gap:2px;margin-bottom:5px">';for(var c=0;c<o.cols.length;c++)h+='<span style="background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:3px;padding:1px 5px;font-size:9px">'+o.cols[c]+'</span>';h+='</div>';}h+='<div style="display:flex;gap:7px;flex-wrap:wrap"><div style="flex:1;min-width:90px"><div class="clbl">الاستخدام</div><div style="font-size:10px;line-height:1.4">'+o.use+'</div></div><div style="flex:1;min-width:90px"><div class="clbl">القرارات</div><div style="font-size:10px;line-height:1.4">'+o.dec+'</div></div></div></div></div>';return h;}
+function rWF(s,cl){var h='<div class="clbl" style="margin-bottom:3px">مسار العمل</div><div class="wfr">';for(var i=0;i<s.length;i++){h+='<div style="display:flex;align-items:center"><div class="wfs" style="background:'+cl+'18;border-color:'+cl+'40;color:'+cl+'">'+s[i]+'</div>';if(i<s.length-1)h+='<span class="wfa">→</span>';h+='</div>';}return h+'</div>';}
+function rSC(sc){var h='<div class="clbl" style="margin-bottom:3px">مقياس القرار</div><div class="scbs">';for(var i=0;i<sc.length;i++){var s=sc[i];h+='<div class="scb" style="background:'+s.bg+';border-color:'+s.br+'"><div class="scbn" style="color:'+s.tx+'">'+s.r+'</div><div class="scbl" style="color:'+s.tx+'">'+s.l+'</div></div>';}return h+'</div>';}
+function rDP(dp,cl){var h='<div class="clbl" style="margin-bottom:3px">خطوط القرار</div><table class="tbl"><tbody>';for(var i=0;i<dp.length;i++)h+='<tr><td style="color:var(--color-text-secondary)">'+dp[i][0]+'</td><td style="color:'+cl+'">→ '+dp[i][1]+'</td></tr>';return h+'</tbody></table>';}
+function rTasks(t){var h='<div class="clbl" style="margin-bottom:3px">توزيع المسؤوليات</div><table class="tbl"><tbody>';for(var i=0;i<t.length;i++)h+='<tr><td>'+t[i][0]+'</td><td style="color:var(--color-text-secondary)">'+t[i][1]+'</td></tr>';return h+'</tbody></table>';}
+function rCycles(c){var h='<div class="clbl" style="margin-bottom:3px">دورات المراجعة</div><div class="cycles">';for(var i=0;i<c.length;i++)h+='<div class="cyc"><div class="cycn">'+(i+1)+'. '+c[i].n+'</div><div class="cycd">'+c[i].d+'</div></div>';return h+'</div>';}
+function rProg(pct,cl){return '<div class="prog-wrap"><div class="prog-lbl"><span>نسبة الإنجاز</span><span style="font-weight:500;color:'+cl+'">'+pct+'٪</span></div><div class="prog-bar"><div class="prog-fill" style="width:'+pct+'%;background:'+cl+'"></div></div></div>';}
+function rDet(){
+  var p=P[cur-1],ic=p.tp==='cont';
+  var slbg=p.id===3?'#dbeafe':p.st==='done'?'#dcfce7':p.st==='curr'?'#ede9fe':ic?'#f3f4f6':'#dbeafe';
+  var sltx=p.id===3?'#1e40af':p.st==='done'?'#166534':p.st==='curr'?'#4338ca':ic?'#6b7280':'#1e40af';
+  var h='<div class="pnl'+(ic?' pnlc':'')+'">';
+  h+='<div class="ph"><div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px"><span class="psl" style="background:'+slbg+';color:'+sltx+'">'+p.sl+'</span><div style="font-size:9.5px;color:var(--color-text-secondary)">'+p.wk+'</div></div><div style="text-align:right"><div class="pt">'+p.nm+'</div><div class="ps">'+p.sb+'</div></div></div>';
+  h+='<div class="mts"><span class="mt">⏱ '+p.du+'</span><span class="mt">👥 '+p.team+' أشخاص</span><span class="mt">★ '+p.ow+'</span></div>';
+  if(p.prog) h+=rProg(p.prog,p.cl);
+  if(p.ev) h+='<div class="ev">💡 '+p.ev+'</div>';
+  if(p.kph) h+='<div style="text-align:center;font-size:11px;font-weight:500;padding:.5rem .9rem;border-radius:7px;background:'+p.bg+';color:'+p.cl+';margin:.5rem 0">«'+p.kph+'»</div>';
+  h+='<div class="gb" style="background:'+p.bg+';border-right-color:'+p.cl+'">'+p.gl+'</div>';
+  if(p.wf) h+=rWF(p.wf,p.cl);
+  if(p.sc) h+=rSC(p.sc);
+  if(p.cycles) h+=rCycles(p.cycles);
+  if(p.tasks) h+=rTasks(p.tasks);
+  h+='<div class="cls" style="margin-top:.65rem"><div><div class="clbl">الأنشطة الرئيسية</div>';
+  for(var ai=0;ai<p.ac.length;ai++) h+='<div class="ai">'+p.ac[ai]+'</div>';
+  h+='</div><div><div class="clbl">المدخلات</div>';
+  for(var ip=0;ip<p.inp.length;ip++) h+='<div class="oi"><span style="color:var(--color-text-secondary);font-size:9.5px;flex-shrink:0">←</span>'+p.inp[ip]+'</div>';
+  h+='<div style="text-align:center;color:var(--color-text-secondary);font-size:10px;margin:4px 0">↓</div>';
+  h+='<div class="clbl">المخرجات — اضغط للتفاصيل</div>';
+  for(var op=0;op<p.out.length;op++) h+=rOut(p.out[op],p.cl);
+  h+='</div></div>';
+  if(p.dp) h+=rDP(p.dp,p.cl);
+  if(p.mlNote) h+='<div class="mlnote" style="background:'+p.cl+'0d;border-color:'+p.cl+'30;color:'+p.cl+'">📊 '+p.mlNote+'</div>';
+  if(p.sus) h+='<div class="sus">📋 '+p.sus+'</div>';
+  h+='<div class="kpr">';
+  for(var kp=0;kp<p.kp.length;kp++) h+='<div class="kp" style="background:'+p.bg+';border-color:'+p.cl+'20"><div class="kpn" style="color:'+p.cl+'">'+p.kp[kp].n+'</div><div class="kpl" style="color:'+p.tx+'">'+p.kp[kp].l+'</div></div>';
+  h+='</div>';
+  if(p.tn){var tc=p.tnCls?'tn '+p.tnCls:'tn';h+='<div class="'+tc+'">📌 '+p.tn+'</div>';}
+  var mems=p.teamMembers||p.members;
+  h+='<div class="tr">';
+  for(var tm=0;tm<mems.length;tm++){
+    var m=mems[tm];
+    if(typeof m==='string'){h+='<div class="tm"><div class="dt" style="background:'+p.cl+'"></div>'+m+'</div>';}
+    else{var g=m.gold;h+='<div class="tm'+(g?' gold':'')+'"><div class="dt" style="background:'+(g?'#ca8a04':p.cl)+'"></div>'+m.nm+(m.rl?'<span style="font-size:9px;opacity:.65;margin-right:2px"> — '+m.rl+'</span>':'')+(g?'<span style="font-size:9px;color:#ca8a04">★</span>':'')+'</div>';}
+  }
+  h+='</div>';
+  if(p.nt) h+='<div class="nt"><span style="flex-shrink:0;color:'+p.cl+'">ℹ</span>'+p.nt+'</div>';
+  h+='</div>';
+  document.getElementById('det').innerHTML=h;
+  var bd=document.getElementById('mb');
+  var isDone=p.st==='done',isCurr=p.st==='curr';
+  bd.innerHTML=(isDone?'<span style="font-size:6px">●</span> مكتملة: ':isCurr?'<span style="font-size:6px">●</span> جارية: ':'<span style="font-size:6px">○</span> عرض: ')+p.nm;
+  bd.style.background=isDone?'#dcfce7':p.id===3?'#dbeafe':isCurr?'#ede9fe':'#f3f4f6';
+  bd.style.color=isDone?'#166534':p.id===3?'#1e40af':isCurr?'#4338ca':'#6b7280';
+}
+function rTabs(){
+  var mn=P.filter(function(p){return p.tp==='main';});
+  var cn=P.filter(function(p){return p.tp==='cont';});
+  document.getElementById('tm').innerHTML=mn.map(function(p){
+    var act=cur===p.id,dc=p.st==='done'?'#166534':p.st==='curr'?'#4338ca':'#9ca3af';
+    if(p.id===3)dc='#1e40af';
+    return '<button class="tab" onclick="sel('+p.id+')" style="'+(act?'background:'+p.cl+';color:white;border-color:transparent;font-weight:500':'')+'"><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:'+dc+';margin-left:4px;vertical-align:middle"></span>'+p.nm+'</button>';
+  }).join('');
+  document.getElementById('tc').innerHTML=cn.map(function(p){
+    var act=cur===p.id;
+    return '<button class="tab tabc" onclick="sel('+p.id+')" style="'+(act?'background:#374151;color:white;border-color:transparent':'')+'">⟳ '+p.nm+'</button>';
+  }).join('');
+}
+function sel(id){cur=id;rTabs();rDet();}
+rTabs();rDet();
+</script>
+</body>
+</html>
